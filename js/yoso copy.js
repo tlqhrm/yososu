@@ -2,17 +2,61 @@
 
 var HOME_PATH = window.HOME_PATH || '.';
 
+var htmlMarker1 = {
+    content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/img/cluster-marker-1.png);background-size:contain;"></div>',
+    size: N.Size(40, 40),
+    anchor: N.Point(20, 20)
+},
+htmlMarker2 = {
+    content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/img/cluster-marker-2.png);background-size:contain;"></div>',
+    size: N.Size(40, 40),
+    anchor: N.Point(20, 20)
+},
+htmlMarker3 = {
+    content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/img/cluster-marker-3.png);background-size:contain;"></div>',
+    size: N.Size(40, 40),
+    anchor: N.Point(20, 20)
+},
+htmlMarker4 = {
+    content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/img/cluster-marker-4.png);background-size:contain;"></div>',
+    size: N.Size(40, 40),
+    anchor: N.Point(20, 20)
+},
+htmlMarker5 = {
+    content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/img/cluster-marker-5.png);background-size:contain;"></div>',
+    size: N.Size(40, 40),
+    anchor: N.Point(20, 20)
+};
 
+function showMarker(map, marker) {
+
+    if (marker.getMap()) return;
+    marker.setMap(map);
+   
+}
+
+function hideMarker(map, marker) {
+
+    if (!marker.getMap()) return;
+    marker.setMap(null);
+}
 
 var map = new naver.maps.Map(document.getElementById('map'), {
     scaleControl: false,
     logoControl: false,
     mapDataControl: false,
     zoomControl: true,
+    zoomControlOptions: {
+        position: naver.maps.Position.TOP_LEFT,
+        style: naver.maps.ZoomControlStyle.SMALL
+    },
     minZoom: 6,
-    zoom: 8,
-    center: new naver.maps.LatLng(36.5666805, 127.9784147)
+    zoom: 13,
+    center: new naver.maps.LatLng(37.5666805, 126.9784147)
 });
+var markers = [];
+
+
 
 var nowMarker;
 var nowLocation = new naver.maps.InfoWindow();
@@ -21,7 +65,7 @@ function onSuccessGeolocation(position) {
                                          position.coords.longitude);
 
     map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
-    map.setZoom(10); // 지도의 줌 레벨을 변경합니다.
+    map.setZoom(13); // 지도의 줌 레벨을 변경합니다.
 
     nowLocation.setContent('<div style="padding:20px;">' + '현재 위치' + '</div>');
 
@@ -79,20 +123,15 @@ $(window).on("load", function() {
    
    $.ajax({
      type:"get",
-     url:"https://api.odcloud.kr/api/uws/v1/inventory?page=1&perPage=1189&serviceKey=hCNJd03rYvvexwy6ePp8Y7BvY8fdKjTbUhMtj6nM4Mm4yV1B6zaD713epk7b1iZVGFo6Zo1XG%2FEaJP%2F2wy5KrQ%3D%3D",
+     url:"https://api.odcloud.kr/api/uws/v1/inventory?page=1&perPage=10000&serviceKey=hCNJd03rYvvexwy6ePp8Y7BvY8fdKjTbUhMtj6nM4Mm4yV1B6zaD713epk7b1iZVGFo6Zo1XG%2FEaJP%2F2wy5KrQ%3D%3D",
      data : {
 
      },
      dataType:"json",
      success: function(data){console.log(data)
-       
 
-
-        //  document.getElementById("time").textContent = '업데이트 : ' + data.data[0].데이터기준일;
-     	
-        var markers = [];
      	var infoWindows = [];
-     	var elem="";
+
      	for(var i=0; i<data.currentCount; i++){
              var price = data.data[i].price;
             if(price == null || price == 0 || price == "undefined"){
@@ -109,50 +148,14 @@ $(window).on("load", function() {
             if(now_hour - update_hour == 0){
                 show_hour = "1시간 이내";
             }
-            
-
-     		elem +=  '<tr>'+
-     					// '<td >'+
-				    	// 	data.data[i].코드+
-				    	// '</td>'+
-				    	'<td >'+
-				    		data.data[i].name+
-				    	'</td>'+
-				    	'<td >'+
-				    		data.data[i].addr+
-				    	'</td>'+
-				    	'<td >'+
-				    		data.data[i].tel+
-				    	'</td>'+
-				    	'<td >'+
-				    		data.data[i].openTime+
-				    	'</td>'+
-				    	'<td>'+
-				    		data.data[i].inventory+
-				    	'</td>'+
-				    	'<td>'+
-				    		price+
-				    	'</td>'+
-                        '<td>'+
-				    		show_hour+
-				    	'</td>'+
-                        // '<td>'+
-				    	// 	data.data[i].color+
-				    	// '</td>'+
-				    	// '<td>'+
-				    	// 	data.data[i].위도+
-				    	// '</td>'+
-				    	// '<td>'+
-				    	// 	data.data[i].경도+
-				    	// '</td>'+
-				    	// '<td>'+
-				    	// 	data.data[i].데이터기준일+
-				    	// '</td>'+
-				    '</tr>';
+            var openTime = data.data[i].openTime;
+            if(openTime == null ||openTime == "null"){
+                openTime = "정보없음";
+            }
                     
             var latlngs = new naver.maps.LatLng(data.data[i].lat, data.data[i].lng);
-            // var marker;
             var url;
+
             if(data.data[i].inventory > 1){
                 url = HOME_PATH +'/img/example/pin_default.png';
                 
@@ -170,13 +173,12 @@ $(window).on("load", function() {
                 marker = new naver.maps.Marker({
                     position: latlngs,
                     map: map,
-                    icon: icon
+                    icon: icon,
                 });
 
             marker.set('seq', i);
 
-        // marker.addListener('mouseover', onMouseOver);
-        // marker.addListener('mouseout', onMouseOut);
+
 
         var infoWindow = new naver.maps.InfoWindow({
             content: '<span id="info"><div style="color:red;">업데이트 시간 : '+show_hour+'</div>'+
@@ -186,12 +188,23 @@ $(window).on("load", function() {
                         '<div>주소 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: '+data.data[i].addr+'</div>'+
                         '<div>가격 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: '+price+'(리터당)</div></div>'+
                         '<div>전화번호 : '+data.data[i].tel+'</div>'+
-                        '<div>영업시간 : '+data.data[i].openTime+'</div></span>'
+                        '<div>영업시간 : '+openTime+'</div></span>'
                         
                         
                         
 
         });
+
+        
+
+        var mapBounds = map.getBounds();
+        position = marker.getPosition();
+
+        if (mapBounds.hasLatLng(position)) {
+            showMarker(map, marker);
+        } else {
+            hideMarker(map, marker);
+        }
 
         markers.push(marker);
         infoWindows.push(infoWindow);    
@@ -204,6 +217,24 @@ $(window).on("load", function() {
         marker = null; 
             
      }
+
+     var markerClustering = new MarkerClustering({
+        minClusterSize: 2,
+        maxZoom: 13,
+        map: map,
+        markers: markers,
+        disableClickZoom: false,
+        gridSize: 120,
+        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+        indexGenerator: [10, 100, 200, 500, 1000],
+        stylingFunction: function(clusterMarker, count) {
+            $(clusterMarker.getElement()).find('div:first-child').text(count);
+        }
+
+    });
+
+     
+     
     
     function getClickHandler(seq) {
         return function(e) {
@@ -222,12 +253,15 @@ $(window).on("load", function() {
         naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
     }
 
-    document.getElementById("tbody").innerHTML += elem;
-     	
-     	
     },
      error: function(err){console.log(err)}
    })
 
    
+   
 }());
+
+
+
+
+    
