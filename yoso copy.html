@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="전국 거점주유소 요소수 재고 현황">
+
+<meta property="og:type" content="website"> 
+<meta property="og:title" content="전국 거점주유소 요소수 재고 현황">
+<meta property="og:description" content="전국 거점주유소 요소수 재고 현황">
+<meta property="og:image" content="https://www.yososu.shop/img/요소수.png">
+<meta property="og:url" content="https://www.yososu.shop">
+<meta name="robots" content="index,follow">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8989747852708874"
+     crossorigin="anonymous"></script>
+<title>요소수 재고 현황 지도</title>
+<link rel="icon" href="https://www.yososu.shop/img/pngwing.com.png">
+<style>
+	#font2{
+	  font-size: 20px;
+  }
+  table {
+    display: inline-block;
+    
+    border: 1px solid #444444;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+	font-size: 22px;
+  }
+
+  td {
+    border: 1px solid #444444;
+    padding: 6px;
+  }
+  
+  body{
+	  font-family: Malgun;
+	  
+	  
+  }
+  #map{
+	font-size: 1.5em;
+  }
+
+  #info{
+	  line-height: 2em;
+  }
+  
+</style>
+</head>
+<body style="text-align:center;">
+<div style="display:inline-block; margin-left:auto; margin-right:auto;">
+<h1> 요소수 중점판매 주유소 재고현황</h1>
+
+<!-- <h3>(위치권한을 허용해 주세요.)</h3> -->
+<h2 id="time"></h2>
+
+
+
+<div style="font-size: 1.3em;"> <img src="img/example/pin_default.png" width="36"> : 재고 있음</div>
+<div style="font-size: 1.3em;"> <img src="img/example/marker-default.png" width="36"> : 재고 없음</div>
+<div style="font-size: 1.3em;">(클릭시 주유소 정보 확인)</div>
+</div>
+
+<h1></h1>
+<div>
+<div id="map" style="width:900px;height:900px; display:inline-block; margin-left:auto; margin-right:auto; position:relative;"></div>
+</div>
+
+<span id="font2">
+	<h4>요소수 중점유통 주유소에서 2시간 간격으로 입력하는 데이터를 5분 단위로 업데이트하여 제공하여 실제 재고 현황과 일부 차이가 있을 수 있습니다.</h4>
+	<p>공개되는 요소수 가격은 기본적으로 벌크 요소수 가격이며, 페트 요소수 가격은 표시된 가격과 다를 수 있습니다.</p>
+	<p>벌크 요소수가 매진 되었을 경우, 페트 요소수 가격으로 업데이트 됩니다.</p>
+	</span>
+<div>
+<table class="fileDataDetail table">
+<tbody id="tbody" style="border: 1px solid gray; text-align: center;">
+
+<tr style="border: 1px solid gray">
+	<!-- <td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="코드">코드</span>
+	</td> -->
+	<td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="명칭">명칭</span>
+	</td>
+	<td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="주소">주소</span>
+	</td>
+	<td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="전화번호">전화번호</span>
+	</td>
+	<td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="영업시간">영업시간</span>
+	</td>
+	<td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="재고량">재고량(리터)</span>
+	</td>
+	<td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="가격">가격(리터당)</span>
+	</td>
+	<td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="업데이트">업데이트</span>
+	</td>
+	<!-- <td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="업데이트">컬러</span>
+	</td> -->
+	<!-- <td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="위도">위도</span>
+	</td>
+	<td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="경도">경도</span>
+	</td>
+	<td >
+		<span style="font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="데이터기준일">데이터기준일</span>
+	</td> -->
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=hfbkimx8o4"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/yoso copy.js"></script>
+</body>
+</html>
